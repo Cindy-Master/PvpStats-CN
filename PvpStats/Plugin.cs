@@ -1,3 +1,4 @@
+using Dalamud;
 using Dalamud.Game;
 using Dalamud.Game.Command;
 using Dalamud.IoC;
@@ -53,6 +54,8 @@ public sealed class Plugin : IDalamudPlugin {
     public Configuration Configuration { get; init; }
     internal MemoryService Functions { get; init; }
 
+    internal static ClientLanguage Language;
+
     internal bool DebugMode { get; set; }
 
     public Plugin(
@@ -78,6 +81,7 @@ public sealed class Plugin : IDalamudPlugin {
             CommandManager = commandManager;
             DataManager = dataManager;
             ClientState = clientState;
+            Language = clientState.ClientLanguage;
             GameNetwork = gameNetwork;
             Condition = condition;
             DutyState = dutyState;

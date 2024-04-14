@@ -1,20 +1,27 @@
-﻿using Dalamud.Utility;
+﻿using Dalamud;
+using Dalamud.Utility;
 using LiteDB;
 using PvpStats.Types.Match;
 using System;
 
 namespace PvpStats.Types.Player;
 public class PlayerAlias : IEquatable<PlayerAlias>, IEquatable<CrystallineConflictPlayer>, IEquatable<string> {
-    public string Name { get; set; } = "";
-    public string HomeWorld { get; set; } = "";
+    public string Name { get; set; }
+    public string HomeWorld { get; set; }
     //[BsonId]
     public string FullName => $"{Name} {HomeWorld}";
 
-    public static explicit operator PlayerAlias(string s) {
+    public static explicit operator PlayerAlias(string s) 
+    {
         s = s.Trim();
-        var splitString = s.Split(" ");
-        if(splitString is null || splitString.Length != 3) {
+        string[]? splitString = s.Split(" ");
+        if(splitString is null) 
+        {
             throw new ArgumentException("Cannot convert string to player alias!");
+        }
+        if(Plugin.Language == (ClientLanguage)4) 
+        {
+            return new PlayerAlias(splitString[0], splitString[1]);
         }
         return new PlayerAlias(splitString[0] + " " + splitString[1], splitString[2]);
     }
