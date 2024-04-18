@@ -1,15 +1,15 @@
 using Dalamud.Interface.Colors;
 using Dalamud.Interface.Utility;
 using ImGuiNET;
-using Pvpstats.Helpers;
-using Pvpstats.Types.Match;
-using Pvpstats.Types.Player;
+using PvpStats.Helpers;
+using PvpStats.Types.Match;
+using PvpStats.Types.Player;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 
-namespace Pvpstats.Windows.Summary;
+namespace PvpStats.Windows.Summary;
 internal class CrystallineConflictSummary {
 
     private class JobStats {
