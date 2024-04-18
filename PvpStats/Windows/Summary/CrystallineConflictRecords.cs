@@ -116,7 +116,7 @@ internal class CrystallineConflictRecords {
             if(longestMatch != null) {
                 addSuperlative(longestMatch, "最长的比赛", ImGuiHelper.GetTimeSpanString((TimeSpan)longestMatch!.MatchDuration));
                 addSuperlative(shortestMatch, "最短的比赛", ImGuiHelper.GetTimeSpanString((TimeSpan)shortestMatch!.MatchDuration));
-                addSuperlative(closestMatch, "最接近的比赛", closestMatch!.LoserProgress.ToString());
+                addSuperlative(closestMatch, "最接近的比分", closestMatch!.LoserProgress.ToString());
                 if(mostKills != null) {
                     addSuperlative(mostKills, "最多击杀", mostKills!.LocalPlayerStats!.Kills.ToString());
                     addSuperlative(mostDeaths, "最多死亡", mostDeaths!.LocalPlayerStats!.Deaths.ToString());
@@ -192,8 +192,8 @@ internal class CrystallineConflictRecords {
 
         using(var table = ImRaii.Table("对局", 6, ImGuiTableFlags.NoBordersInBody | ImGuiTableFlags.NoHostExtendX | ImGuiTableFlags.NoClip | ImGuiTableFlags.NoSavedSettings)) {
             if(table) {
-                ImGui.TableSetupColumn("时间", ImGuiTableColumnFlags.WidthFixed, ImGuiHelpers.GlobalScale * 100f);
-                ImGui.TableSetupColumn("地图", ImGuiTableColumnFlags.WidthFixed, ImGuiHelpers.GlobalScale * 150f);
+                ImGui.TableSetupColumn("时间", ImGuiTableColumnFlags.WidthFixed, ImGuiHelpers.GlobalScale * 158f);
+                ImGui.TableSetupColumn("地图", ImGuiTableColumnFlags.WidthFixed, ImGuiHelpers.GlobalScale * 100f);
                 ImGui.TableSetupColumn("职业", ImGuiTableColumnFlags.WidthFixed, ImGuiHelpers.GlobalScale * 40f);
                 ImGui.TableSetupColumn("结果", ImGuiTableColumnFlags.WidthFixed, ImGuiHelpers.GlobalScale * 40f);
 
@@ -205,10 +205,11 @@ internal class CrystallineConflictRecords {
                 }
                 ImGui.TableNextColumn();
                 if(!match.IsSpectated) {
-                    ImGui.TextColored(ImGuiHelper.GetJobColor(match.LocalPlayerTeamMember!.Job), $"{match.LocalPlayerTeamMember!.Job}");
+                    string jobChineseName = match.LocalPlayerTeamMember?.Job.HasValue == true ? PlayerJobHelper.ChineseNameMap.GetValueOrDefault(match.LocalPlayerTeamMember.Job.Value, "") : "";
+                    ImGui.TextColored(ImGuiHelper.GetJobColor(match.LocalPlayerTeamMember?.Job), jobChineseName);
                     ImGui.TableNextColumn();
                     var color = match.IsWin ? ImGuiColors.HealerGreen : match.IsLoss ? ImGuiColors.DalamudRed : ImGuiColors.DalamudGrey;
-                    var result = match.IsWin ? "WIN" : match.IsLoss ? "LOSS" : "???";
+                    var result = match.IsWin ? "胜利" : match.IsLoss ? "失败" : "???";
                     ImGui.TextColored(color, result);
                 } else {
                     ImGui.Text($"观战");

@@ -1,4 +1,4 @@
-using Dalamud.Interface.Colors;
+﻿using Dalamud.Interface.Colors;
 using Dalamud.Interface.Utility;
 using ImGuiNET;
 using PvpStats.Helpers;
@@ -266,7 +266,7 @@ internal class CrystallineConflictSummary {
 
             if(_jobStats.Count > 0) {
                 ImGui.Separator();
-                ImGui.TextColored(ImGuiColors.DalamudYellow, "Jobs Played:");
+                ImGui.TextColored(ImGuiColors.DalamudYellow, "已游玩角色:");
                 DrawJobTable(_jobStats);
             }
 

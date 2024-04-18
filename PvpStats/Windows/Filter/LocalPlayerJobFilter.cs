@@ -24,7 +24,7 @@ public class LocalPlayerJobFilter : DataFilter {
         _roleCount = allRoles.Count();
         _jobCombo.Add("All Jobs");
         foreach(var role in allRoles) {
-            _jobCombo.Add(role.ToString());
+            _jobCombo.Add(PlayerJobHelper.JobSubRoleChineseMap.TryGetValue(role, out var roleName) ? roleName : role.ToString());
         }
         foreach(var job in allJobs) {
             _jobCombo.Add(PlayerJobHelper.GetNameFromJob(job));

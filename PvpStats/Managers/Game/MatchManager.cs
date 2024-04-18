@@ -237,7 +237,7 @@ internal class MatchManager : IDisposable {
 
             team.Players.Add(new() {
                 Alias = (PlayerAlias)$"{player} {world}",
-                Job = (Job)PlayerJobHelper.GetJobFromName(translatedJob)!,
+                Job = PlayerJobHelper.GetJobFromName(translatedJob),
                 Rank = translatedRank != null ? (PlayerRank)translatedRank : null,
                 Team = team.TeamName
             });

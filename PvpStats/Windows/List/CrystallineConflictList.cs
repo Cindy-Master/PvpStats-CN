@@ -4,6 +4,7 @@ using Dalamud.Interface.Utility.Raii;
 using ImGuiNET;
 using PvpStats.Helpers;
 using PvpStats.Types.Match;
+using PvpStats.Types.Player;
 using System;
 using System.Collections.Generic;
 using System.Numerics;
@@ -56,10 +57,18 @@ internal class CrystallineConflictList : FilteredList<CrystallineConflictMatch> 
         }
         ImGui.TableNextColumn();
         if(!item.IsSpectated) {
-            ImGui.TextColored(ImGuiHelper.GetJobColor(item.LocalPlayerTeamMember!.Job), item.LocalPlayerTeamMember.Job.ToString());
+            // 断言 Job 不为 null
+            Job? nullableJob = item.LocalPlayerTeamMember!.Job;
+            if(nullableJob.HasValue) {
+                Job job = nullableJob.Value;
+                string jobChineseName = PlayerJobHelper.ChineseNameMap.ContainsKey(job) ? PlayerJobHelper.ChineseNameMap[job] : "未知职业";
+                ImGui.TextColored(ImGuiHelper.GetJobColor(job), jobChineseName);
+            }
         }
+
+
         ImGui.TableNextColumn();
-        ImGui.Text($"{item.MatchType}");
+        ImGui.Text($"{MatchHelper.MatchTypeChineseMap[item.MatchType]}");
         ImGui.TableNextColumn();
         ImGui.Text(ImGuiHelper.GetTimeSpanString(item.MatchDuration ?? TimeSpan.Zero));
         ImGui.TableNextColumn();
@@ -74,7 +83,7 @@ internal class CrystallineConflictList : FilteredList<CrystallineConflictMatch> 
         } else {
             color = isWin ? ImGuiColors.HealerGreen : ImGuiColors.DalamudRed;
             color = noWinner ? ImGuiColors.DalamudGrey : color;
-            resultText = isWin ? "WIN" : "LOSE";
+            resultText = isWin ? "胜利" : "失败";
             resultText = noWinner ? "???" : resultText;
         }
         ImGui.TextColored(color, resultText);

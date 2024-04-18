@@ -15,7 +15,7 @@ internal class CrystallineConflictPlayerList : CCStatsList<PlayerAlias>
 
     protected override List<ColumnParams> Columns { get; set; } = new() {
         new ColumnParams{Name = "名称", Id = 0, Width = 200f, Flags = ImGuiTableColumnFlags.WidthFixed | ImGuiTableColumnFlags.NoReorder | ImGuiTableColumnFlags.NoHide },
-        new ColumnParams{Name = "所属世界", Id = 1, Width = 110f, Flags = ImGuiTableColumnFlags.WidthFixed },
+        new ColumnParams{Name = "所属服务器", Id = 1, Width = 110f, Flags = ImGuiTableColumnFlags.WidthFixed },
         new ColumnParams{Name = "偏爱职业", Id = (uint)"StatsAll.Job".GetHashCode() },
         new ColumnParams{Name = "总场次", Id = (uint)"StatsAll.Matches".GetHashCode() },
         new ColumnParams{Name = "玩家胜利", Id = (uint)"StatsAll.Wins".GetHashCode(), Flags = ImGuiTableColumnFlags.None },
@@ -130,7 +130,8 @@ internal class CrystallineConflictPlayerList : CCStatsList<PlayerAlias>
         var job = StatsModel[item].StatsAll.Job;
         if (job != null)
         {
-            ImGui.TextColored(ImGuiHelper.GetJobColor(job), $"{job}");
+            string jobChineseName = PlayerJobHelper.ChineseNameMap.ContainsKey(job.Value) ? PlayerJobHelper.ChineseNameMap[job.Value] : "未知职业";
+            ImGui.TextColored(ImGuiHelper.GetJobColor(job), jobChineseName);
         }
         ImGui.TableNextColumn();
         ImGui.TextUnformatted($"{StatsModel[item].StatsAll.Matches}");

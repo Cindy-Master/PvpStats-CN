@@ -6,6 +6,50 @@ using System.Text.RegularExpressions;
 namespace PvpStats.Helpers;
 internal static class PlayerJobHelper {
 
+
+    internal static Dictionary<Job, string> ChineseNameMap = new Dictionary<Job, string>() {
+        { Job.PLD, "骑士" },
+        { Job.WAR, "战士" },
+        { Job.DRK, "暗黑骑士" },
+        { Job.GNB, "绝枪战士" },
+        { Job.MNK, "武僧" },
+        { Job.DRG, "龙骑士" },
+        { Job.NIN, "忍者" },
+        { Job.SAM, "武士" },
+        { Job.RPR, "钐镰客" },
+        { Job.VPR, "Viper" },
+        { Job.WHM, "白魔法师" },
+        { Job.SCH, "学者" },
+        { Job.AST, "占星术士" },
+        { Job.SGE, "贤者" },
+        { Job.BRD, "吟游诗人" },
+        { Job.MCH, "机工士" },
+        { Job.DNC, "舞者" },
+        { Job.BLM, "黑魔法师" },
+        { Job.SMN, "召唤师" },
+        { Job.RDM, "赤魔法师" },
+        { Job.PCT, "画师" },
+    };
+
+    internal static Dictionary<JobSubRole, string> JobSubRoleChineseMap = new Dictionary<JobSubRole, string> {
+        { JobSubRole.TANK, "坦克" },
+        { JobSubRole.HEALER, "治疗" },
+        { JobSubRole.MELEE, "近战" },
+        { JobSubRole.RANGED, "远程" },
+        { JobSubRole.CASTER, "法师" }
+    };
+
+    internal static string GetSubRoleChineseName(Job? job) {
+        if(!job.HasValue) return "未知职能";
+        JobSubRole? subRole = GetSubRoleFromJob(job.Value);  // 使用已有的方法获取子角色枚举
+        if(subRole.HasValue && JobSubRoleChineseMap.ContainsKey(subRole.Value)) {
+            return JobSubRoleChineseMap[subRole.Value];  // 返回子角色的中文名称
+        } else {
+            return "未知职能";  // 如果没有有效的子角色或字典中无此键
+        }
+    }
+
+
     internal static Dictionary<Job, string> AbbreviationNameMap = new Dictionary<Job, string>() {
         { Job.PLD, "Paladin" },
         { Job.WAR, "Warrior" },
@@ -87,7 +131,7 @@ internal static class PlayerJobHelper {
 
     internal static string GetNameFromJob(Job job) {
         if(AbbreviationNameMap.ContainsKey(job)) {
-            return AbbreviationNameMap[job];
+            return ChineseNameMap[job];
         } else {
             return "";
         }

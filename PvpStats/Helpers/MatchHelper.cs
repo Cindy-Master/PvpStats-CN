@@ -34,6 +34,21 @@ public static class MatchHelper {
             return null;
         }
     }
+    public static Dictionary<CrystallineConflictMatchType, string> MatchTypeChineseMap = new Dictionary<CrystallineConflictMatchType, string>()
+{
+    { CrystallineConflictMatchType.Casual, "练习赛" },
+    { CrystallineConflictMatchType.Ranked, "段位赛" },
+    { CrystallineConflictMatchType.Custom, "自定义" },
+    { CrystallineConflictMatchType.Unknown, "未知" }
+};
+
+    public static string GetMatchTypeChinese(CrystallineConflictMatchType matchType) {
+        if(MatchTypeChineseMap.TryGetValue(matchType, out var chineseName)) {
+            return chineseName;
+        }
+        return "未知"; // 默认值，防止字典中没有对应的枚举值
+    }
+
 
     public static CrystallineConflictMatchType GetMatchType(uint dutyId) {
         switch(dutyId) {
