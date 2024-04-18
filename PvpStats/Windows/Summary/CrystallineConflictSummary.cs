@@ -1,15 +1,15 @@
-﻿using Dalamud.Interface.Colors;
+using Dalamud.Interface.Colors;
 using Dalamud.Interface.Utility;
 using ImGuiNET;
-using PvpStats.Helpers;
-using PvpStats.Types.Match;
-using PvpStats.Types.Player;
+using Pvpstats.Helpers;
+using Pvpstats.Types.Match;
+using Pvpstats.Types.Player;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 
-namespace PvpStats.Windows.Summary;
+namespace Pvpstats.Windows.Summary;
 internal class CrystallineConflictSummary {
 
     private class JobStats {
@@ -357,7 +357,7 @@ internal class CrystallineConflictSummary {
         if(ImGui.BeginTable($"职业表", 4, ImGuiTableFlags.NoBordersInBody | ImGuiTableFlags.NoHostExtendX | ImGuiTableFlags.NoClip | ImGuiTableFlags.NoSavedSettings)) {
             ImGui.TableSetupColumn("职业");
             ImGui.TableSetupColumn($"比赛");
-            ImGui.TableSetupColumn($"胜利");
+            ImGui.TableSetupColumn($"胜利(指遇到后的胜利数量)");
             ImGui.TableSetupColumn($"胜利比率");
 
             ImGui.TableHeadersRow();
@@ -385,7 +385,7 @@ internal class CrystallineConflictSummary {
         if(ImGui.BeginTable($"JobTable", 4, ImGuiTableFlags.NoBordersInBody | ImGuiTableFlags.NoHostExtendX | ImGuiTableFlags.NoClip | ImGuiTableFlags.NoSavedSettings)) {
             ImGui.TableSetupColumn("玩家");
             //ImGui.TableSetupColumn($"Home World");
-            ImGui.TableSetupColumn($"喜欢的职业", ImGuiTableColumnFlags.WidthFixed, ImGuiHelpers.GlobalScale * 45f);
+            ImGui.TableSetupColumn($"职业", ImGuiTableColumnFlags.WidthFixed, ImGuiHelpers.GlobalScale * 45f);
             ImGui.TableSetupColumn($"比赛", ImGuiTableColumnFlags.WidthFixed, ImGuiHelpers.GlobalScale * 45f);
             ImGui.TableSetupColumn($"胜利", ImGuiTableColumnFlags.WidthFixed, ImGuiHelpers.GlobalScale * 45f);
             //ImGui.TableSetupColumn($"Win Rate");
