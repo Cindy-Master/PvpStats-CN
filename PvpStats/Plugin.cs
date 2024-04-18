@@ -19,8 +19,8 @@ public sealed class Plugin : IDalamudPlugin {
     internal const string DatabaseName = "data.db";
 
     private const string CCStatsCommandName = "/ccstats";
-    private const string DebugCommandName = "/Pvpstatdebug";
-    private const string ConfigCommandName = "/Pvpstatconfig";
+    private const string DebugCommandName = "/pvpstatdebug";
+    private const string ConfigCommandName = "/pvpstatconfig";
 
     //Dalamud services
     internal DalamudPluginInterface PluginInterface { get; init; }
