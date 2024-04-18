@@ -15,7 +15,7 @@ public class CrystallineConflictPlayer {
         Alias = (PlayerAlias)"Sarah Montcroix Siren";
     }
 
-    public CrystallineConflictPlayer(PlayerAlias alias, Job? job, PlayerRank? rank = null) {
+    public CrystallineConflictPlayer(PlayerAlias alias, Job job, PlayerRank? rank = null) {
         Alias = alias;
         Job = job;
         Rank = rank;
