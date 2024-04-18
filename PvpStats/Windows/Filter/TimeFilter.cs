@@ -19,10 +19,10 @@ public enum TimeRange {
 }
 
 public class TimeFilter : DataFilter {
-    public override string Name => "Time";
+    public override string Name => "时间";
 
     public TimeRange StatRange { get; set; } = TimeRange.All;
-    public static string[] Range = { "Past 24 hours", "Past 7 days", "This month", "Last month", "This year", "Last year", "All-time", "By season", "Custom" };
+    public static string[] Range = { "24小时内", "7天内", "本月内", "上个月", "今年", "去年", "全部时间", "按赛季", "自定义" };
 
     public DateTime StartTime { get; set; }
     public DateTime EndTime { get; set; }
@@ -46,24 +46,24 @@ public class TimeFilter : DataFilter {
         int seasonIndex = Season - 1;
         //ImGui.SetNextItemWidth(float.Min(ImGui.GetContentRegionAvail().X / 2f, ImGuiHelpers.GlobalScale * 125f));
         ImGui.SetNextItemWidth(ImGui.GetContentRegionAvail().X / 2f);
-        if(ImGui.Combo($"##timeRangeCombo", ref statRangeToInt, Range, Range.Length)) {
+        if(ImGui.Combo($"##时间范围选择框", ref statRangeToInt, Range, Range.Length)) {
             _plugin!.DataQueue.QueueDataOperation(() => {
                 StatRange = (TimeRange)statRangeToInt;
                 Refresh();
             });
         }
         if(StatRange == TimeRange.Custom) {
-            if(ImGui.BeginTable("timeFilterTable", 2)) {
+            if(ImGui.BeginTable("时间过滤器", 2)) {
                 ImGui.TableSetupColumn($"c1", ImGuiTableColumnFlags.WidthStretch);
                 ImGui.TableSetupColumn($"c2", ImGuiTableColumnFlags.WidthStretch);
                 ImGui.TableNextRow();
                 ImGui.TableNextColumn();
                 ImGui.AlignTextToFramePadding();
-                ImGui.Text("Start:");
+                ImGui.Text("开始:");
                 ImGui.SameLine();
                 ImGui.SetNextItemWidth(ImGui.GetColumnWidth());
                 var startTime = StartTime.ToString();
-                if(ImGui.InputText($"##startTime", ref startTime, 50, ImGuiInputTextFlags.None)) {
+                if(ImGui.InputText($"##开始时间", ref startTime, 50, ImGuiInputTextFlags.None)) {
                     if(startTime != _lastStartTime) {
                         _lastStartTime = startTime;
                         if(DateTime.TryParse(startTime, out DateTime newStartTime)) {
@@ -75,11 +75,11 @@ public class TimeFilter : DataFilter {
                     }
                 }
                 ImGui.TableNextColumn();
-                ImGui.Text("End:");
+                ImGui.Text("结束:");
                 ImGui.SameLine();
                 ImGui.SetNextItemWidth(ImGui.GetContentRegionAvail().X);
                 var endTime = EndTime.ToString();
-                if(ImGui.InputText($"##endTime", ref endTime, 50, ImGuiInputTextFlags.None)) {
+                if(ImGui.InputText($"##结束时间", ref endTime, 50, ImGuiInputTextFlags.None)) {
                     if(endTime != _lastEndTime) {
                         _lastEndTime = endTime;
                         if(DateTime.TryParse(endTime, out DateTime newEndTime)) {
@@ -95,7 +95,7 @@ public class TimeFilter : DataFilter {
         } else if(StatRange == TimeRange.Season) {
             ImGui.SameLine();
             ImGui.SetNextItemWidth(ImGuiHelpers.GlobalScale * 50f);
-            if(ImGui.Combo($"##seasonCombo", ref seasonIndex, ArenaSeason.Season.Keys.Select(x => x.ToString()).ToArray(), ArenaSeason.Season.Count)) {
+            if(ImGui.Combo($"##赛季组合", ref seasonIndex, ArenaSeason.Season.Keys.Select(x => x.ToString()).ToArray(), ArenaSeason.Season.Count)) {
                 _plugin!.DataQueue.QueueDataOperation(() => {
                     Season = seasonIndex + 1;
                     Refresh();

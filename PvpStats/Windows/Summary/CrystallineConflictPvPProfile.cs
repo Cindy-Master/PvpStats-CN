@@ -21,22 +21,22 @@ internal class CrystallineConflictPvPProfile {
 
     public unsafe void Draw() {
         var pvpProfile = PvPProfile.Instance();
-        ImGuiHelper.HelpMarker("Uses data from your PvP profile", false);
-        ImGui.TextColored(ImGuiColors.DalamudYellow, "Casual:");
+        ImGuiHelper.HelpMarker("使用数据来自你的pvp文件", false);
+        ImGui.TextColored(ImGuiColors.DalamudYellow, "练习赛:");
         if(pvpProfile != null) {
             DrawTable(pvpProfile->CrystallineConflictCasualMatches, pvpProfile->CrystallineConflictCasualMatchesWon);
         }
         ImGui.Separator();
-        ImGui.TextColored(ImGuiColors.DalamudYellow, "Current Ranked Season:");
+        ImGui.TextColored(ImGuiColors.DalamudYellow, "当前赛季段位:");
         if(pvpProfile != null) {
             DrawTable(pvpProfile->CrystallineConflictRankedMatches, pvpProfile->CrystallineConflictRankedMatchesWon);
             ImGui.NewLine();
-            using(var table = ImRaii.Table("casual", 2, ImGuiTableFlags.NoBordersInBody | ImGuiTableFlags.NoHostExtendX | ImGuiTableFlags.NoClip | ImGuiTableFlags.NoSavedSettings)) {
+            using(var table = ImRaii.Table("练习赛", 2, ImGuiTableFlags.NoBordersInBody | ImGuiTableFlags.NoHostExtendX | ImGuiTableFlags.NoClip | ImGuiTableFlags.NoSavedSettings)) {
                 if(table) {
-                    ImGui.TableSetupColumn("description", ImGuiTableColumnFlags.WidthFixed, ImGuiHelpers.GlobalScale * 158f);
+                    ImGui.TableSetupColumn("简介", ImGuiTableColumnFlags.WidthFixed, ImGuiHelpers.GlobalScale * 158f);
                     ImGui.TableSetupColumn($"value", ImGuiTableColumnFlags.WidthFixed, ImGuiHelpers.GlobalScale * 45f);
                     ImGui.TableNextColumn();
-                    ImGui.Text("Current Rank: ");
+                    ImGui.Text("当前段位: ");
                     ImGui.TableNextColumn();
                     PlayerRank curRank = new() {
                         Tier = (ArenaTier)pvpProfile->CrystallineConflictCurrentRank,
@@ -47,7 +47,7 @@ internal class CrystallineConflictPvPProfile {
 
                     ImGui.Text($"{curRank}");
                     ImGui.TableNextColumn();
-                    ImGui.Text("Highest Rank: ");
+                    ImGui.Text("最高等级: ");
                     ImGui.TableNextColumn();
                     PlayerRank peakRank = new() {
                         Tier = (ArenaTier)pvpProfile->CrystallineConflictHighestRank,
@@ -62,20 +62,20 @@ internal class CrystallineConflictPvPProfile {
     }
 
     private void DrawTable(int matches, int wins) {
-        using(var table = ImRaii.Table("casual", 3, ImGuiTableFlags.NoBordersInBody | ImGuiTableFlags.NoHostExtendX | ImGuiTableFlags.NoClip | ImGuiTableFlags.NoSavedSettings)) {
+        using(var table = ImRaii.Table("练习赛", 3, ImGuiTableFlags.NoBordersInBody | ImGuiTableFlags.NoHostExtendX | ImGuiTableFlags.NoClip | ImGuiTableFlags.NoSavedSettings)) {
             if(table) {
-                ImGui.TableSetupColumn("description", ImGuiTableColumnFlags.WidthFixed, ImGuiHelpers.GlobalScale * 158f);
+                ImGui.TableSetupColumn("简介", ImGuiTableColumnFlags.WidthFixed, ImGuiHelpers.GlobalScale * 158f);
                 ImGui.TableSetupColumn($"value", ImGuiTableColumnFlags.WidthFixed, ImGuiHelpers.GlobalScale * 45f);
                 ImGui.TableSetupColumn($"rate", ImGuiTableColumnFlags.WidthFixed, ImGuiHelpers.GlobalScale * 45f);
 
                 ImGui.TableNextColumn();
-                ImGui.Text("Matches: ");
+                ImGui.Text("比赛: ");
                 ImGui.TableNextColumn();
                 ImGui.Text($"{matches.ToString("N0")}");
                 ImGui.TableNextColumn();
 
                 ImGui.TableNextColumn();
-                ImGui.Text("Wins: ");
+                ImGui.Text("胜利: ");
                 ImGui.TableNextColumn();
                 ImGui.Text($"{wins.ToString("N0")}");
                 ImGui.TableNextColumn();

@@ -8,7 +8,7 @@ using System.Text.Json.Serialization;
 
 namespace PvpStats.Windows.Filter;
 public class ArenaFilter : DataFilter {
-    public override string Name => "Arena";
+    public override string Name => "地图";
     [JsonIgnore]
     public bool AllSelected { get; set; }
     public Dictionary<CrystallineConflictMap, bool> FilterState { get; set; } = new();
@@ -49,7 +49,7 @@ public class ArenaFilter : DataFilter {
         int currentIndex = CurrentIndex;
         //bool allSelected = AllSelected;
         ImGui.SetNextItemWidth(ImGui.GetContentRegionAvail().X / 2);
-        if(ImGui.Combo($"##arenaRangeCombo", ref currentIndex, _range.ToArray(), _range.Count)) {
+        if(ImGui.Combo($"##地图范围选择框", ref currentIndex, _range.ToArray(), _range.Count)) {
             _plugin!.DataQueue.QueueDataOperation(() => {
                 CurrentIndex = currentIndex;
                 if(currentIndex == 0) {

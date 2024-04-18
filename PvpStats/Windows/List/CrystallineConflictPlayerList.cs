@@ -10,63 +10,64 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace PvpStats.Windows.List;
-internal class CrystallineConflictPlayerList : CCStatsList<PlayerAlias> {
+internal class CrystallineConflictPlayerList : CCStatsList<PlayerAlias>
+{
 
     protected override List<ColumnParams> Columns { get; set; } = new() {
-        new ColumnParams{Name = "Name", Id = 0, Width = 200f, Flags = ImGuiTableColumnFlags.WidthFixed | ImGuiTableColumnFlags.NoReorder | ImGuiTableColumnFlags.NoHide },
-        new ColumnParams{Name = "Home World", Id = 1, Width = 110f, Flags = ImGuiTableColumnFlags.WidthFixed },
-        new ColumnParams{Name = "Favored Job", Id = (uint)"StatsAll.Job".GetHashCode() },
-        new ColumnParams{Name = "Total Matches", Id = (uint)"StatsAll.Matches".GetHashCode() },
-        new ColumnParams{Name = "Player Wins", Id = (uint)"StatsAll.Wins".GetHashCode(), Flags = ImGuiTableColumnFlags.None },
-        new ColumnParams{Name = "Player Losses", Id = (uint)"StatsAll.Losses".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "Player Win Diff.", Id = (uint)"StatsAll.WinDiff".GetHashCode(), Flags = ImGuiTableColumnFlags.None },
-        new ColumnParams{Name = "Player Win Rate", Id = (uint)"StatsAll.WinRate".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "Your Wins", Id = (uint)"StatsPersonal.Wins".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "Your Losses", Id = (uint)"StatsPersonal.Losses".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "Your Win Diff.", Id = (uint)"StatsPersonal.WinDiff".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "Your Win Rate", Id = (uint)"StatsPersonal.WinRate".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "Teammate Matches", Id = (uint)"StatsTeammate.Matches".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "Teammate Wins", Id = (uint)"StatsTeammate.Wins".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "Teammate Losses", Id = (uint)"StatsTeammate.Losses".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "Teammate Win Diff.", Id = (uint)"StatsTeammate.WinDiff".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "Teammate Win Rate", Id = (uint)"StatsTeammate.WinRate".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "Opponent Matches", Id = (uint)"StatsOpponent.Matches".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "Opponent Wins", Id = (uint)"StatsOpponent.Wins".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "Opponent Losses", Id = (uint)"StatsOpponent.Losses".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "Opponent Win Diff.", Id = (uint)"StatsOpponent.WinDiff".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "Opponent Win Rate", Id = (uint)"StatsOpponent.WinRate".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "Total Kills", Id = (uint)"ScoreboardTotal.Kills".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "Total Deaths", Id = (uint)"ScoreboardTotal.Deaths".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "Total Assists", Id = (uint)"ScoreboardTotal.Assists".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "Total Damage Dealt", Id = (uint)"ScoreboardTotal.DamageDealt".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "Total Damage Taken", Id = (uint)"ScoreboardTotal.DamageTaken".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "Total HP Restored", Id = (uint)"ScoreboardTotal.HPRestored".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "Total Time on Crystal", Id = (uint)"ScoreboardTotal.TimeOnCrystal".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "Kills Per Match", Id = (uint)"ScoreboardPerMatch.Kills".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "Deaths Per Match", Id = (uint)"ScoreboardPerMatch.Deaths".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "Assists Per Match", Id = (uint)"ScoreboardPerMatch.Assists".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "Damage Dealt Per Match", Id = (uint)"ScoreboardPerMatch.DamageDealt".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "Damage Taken Per Match", Id = (uint)"ScoreboardPerMatch.DamageTaken".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "HP Restored Per Match", Id = (uint)"ScoreboardPerMatch.HPRestored".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "Time on Crystal Per Match", Id = (uint)"ScoreboardPerMatch.TimeOnCrystal".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "Kills Per Min", Id = (uint)"ScoreboardPerMin.Kills".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "Deaths Per Min", Id = (uint)"ScoreboardPerMin.Deaths".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "Assists Per Min", Id = (uint)"ScoreboardPerMin.Assists".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "Damage Dealt Per Min", Id = (uint)"ScoreboardPerMin.DamageDealt".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "Damage Taken Per Min", Id = (uint)"ScoreboardPerMin.DamageTaken".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "HP Restored Per Min", Id = (uint)"ScoreboardPerMin.HPRestored".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "Time on Crystal Per Min", Id = (uint)"ScoreboardPerMin.TimeOnCrystal".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "Median Kill Contrib.", Id = (uint)"ScoreboardContrib.Kills".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "Median Death Contrib.", Id = (uint)"ScoreboardContrib.Deaths".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "Median Assist Contrib.", Id = (uint)"ScoreboardContrib.Assists".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "Median Damage Dealt Contrib.", Id = (uint)"ScoreboardContrib.DamageDealt".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "Median Damage Taken Contrib.", Id = (uint)"ScoreboardContrib.DamageTaken".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "Median HP Restored Contrib.", Id = (uint)"ScoreboardContrib.HPRestored".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "Median Time on Crystal Contrib.", Id = (uint)"ScoreboardContrib.TimeOnCrystalDouble".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "Damage Dealt Per Kill/Assist", Id = (uint)"ScoreboardTotal.DamageDealtPerKA".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "Damage Dealt Per Life", Id = (uint)"ScoreboardTotal.DamageDealtPerLife".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "Damage Taken Per Life", Id = (uint)"ScoreboardTotal.DamageTakenPerLife".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
-        new ColumnParams{Name = "HP Restored Per Life", Id = (uint)"ScoreboardTotal.HPRestoredPerLife".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "名称", Id = 0, Width = 200f, Flags = ImGuiTableColumnFlags.WidthFixed | ImGuiTableColumnFlags.NoReorder | ImGuiTableColumnFlags.NoHide },
+        new ColumnParams{Name = "所属世界", Id = 1, Width = 110f, Flags = ImGuiTableColumnFlags.WidthFixed },
+        new ColumnParams{Name = "偏爱职业", Id = (uint)"StatsAll.Job".GetHashCode() },
+        new ColumnParams{Name = "总场次", Id = (uint)"StatsAll.Matches".GetHashCode() },
+        new ColumnParams{Name = "玩家胜利", Id = (uint)"StatsAll.Wins".GetHashCode(), Flags = ImGuiTableColumnFlags.None },
+        new ColumnParams{Name = "玩家失败", Id = (uint)"StatsAll.Losses".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "玩家胜率差", Id = (uint)"StatsAll.WinDiff".GetHashCode(), Flags = ImGuiTableColumnFlags.None },
+        new ColumnParams{Name = "玩家胜率", Id = (uint)"StatsAll.WinRate".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "您的胜利", Id = (uint)"StatsPersonal.Wins".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "您的失败", Id = (uint)"StatsPersonal.Losses".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "您的胜率差", Id = (uint)"StatsPersonal.WinDiff".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "您的胜率", Id = (uint)"StatsPersonal.WinRate".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "队友的场次", Id = (uint)"StatsTeammate.Matches".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "队友的胜利", Id = (uint)"StatsTeammate.Wins".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "队友的失败", Id = (uint)"StatsTeammate.Losses".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "队友的胜率差", Id = (uint)"StatsTeammate.WinDiff".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "队友的胜率", Id = (uint)"StatsTeammate.WinRate".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "对手的场次", Id = (uint)"StatsOpponent.Matches".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "对手的胜利", Id = (uint)"StatsOpponent.Wins".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "对手的失败", Id = (uint)"StatsOpponent.Losses".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "对手的胜率差", Id = (uint)"StatsOpponent.WinDiff".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "对手的胜率", Id = (uint)"StatsOpponent.WinRate".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "总击杀数", Id = (uint)"ScoreboardTotal.Kills".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "总死亡数", Id = (uint)"ScoreboardTotal.Deaths".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "总助攻数", Id = (uint)"ScoreboardTotal.Assists".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "总伤害输出", Id = (uint)"ScoreboardTotal.DamageDealt".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "总承受伤害", Id = (uint)"ScoreboardTotal.DamageTaken".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "总生命值恢复", Id = (uint)"ScoreboardTotal.HPRestored".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "总水晶时间", Id = (uint)"ScoreboardTotal.TimeOnCrystal".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "每场击杀数", Id = (uint)"ScoreboardPerMatch.Kills".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "每场死亡数", Id = (uint)"ScoreboardPerMatch.Deaths".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "每场助攻数", Id = (uint)"ScoreboardPerMatch.Assists".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "每场伤害输出", Id = (uint)"ScoreboardPerMatch.DamageDealt".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "每场承受伤害", Id = (uint)"ScoreboardPerMatch.DamageTaken".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "每场生命值恢复", Id = (uint)"ScoreboardPerMatch.HPRestored".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "每场水晶时间", Id = (uint)"ScoreboardPerMatch.TimeOnCrystal".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "每分钟击杀数", Id = (uint)"ScoreboardPerMin.Kills".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "每分钟死亡数", Id = (uint)"ScoreboardPerMin.Deaths".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "每分钟助攻数", Id = (uint)"ScoreboardPerMin.Assists".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "每分钟伤害输出", Id = (uint)"ScoreboardPerMin.DamageDealt".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "每分钟承受伤害", Id = (uint)"ScoreboardPerMin.DamageTaken".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "每分钟生命值恢复", Id = (uint)"ScoreboardPerMin.HPRestored".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "每分钟水晶时间", Id = (uint)"ScoreboardPerMin.TimeOnCrystal".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "中位击杀贡献", Id = (uint)"ScoreboardContrib.Kills".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "中位死亡贡献", Id = (uint)"ScoreboardContrib.Deaths".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "中位助攻贡献", Id = (uint)"ScoreboardContrib.Assists".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "中位伤害输出贡献", Id = (uint)"ScoreboardContrib.DamageDealt".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "中位承受伤害贡献", Id = (uint)"ScoreboardContrib.DamageTaken".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "中位生命值恢复贡献", Id = (uint)"ScoreboardContrib.HPRestored".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "中位水晶时间贡献", Id = (uint)"ScoreboardContrib.TimeOnCrystalDouble".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "每击杀/助攻伤害输出", Id = (uint)"ScoreboardTotal.DamageDealtPerKA".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "每生命击杀伤害输出", Id = (uint)"ScoreboardTotal.DamageDealtPerLife".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "每生命承受伤害", Id = (uint)"ScoreboardTotal.DamageTakenPerLife".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
+        new ColumnParams{Name = "每生命值恢复", Id = (uint)"ScoreboardTotal.HPRestoredPerLife".GetHashCode(), Flags = ImGuiTableColumnFlags.DefaultHide },
     };
 
     protected override string TableId => "###CCPlayerStatsTable";
@@ -75,50 +76,60 @@ internal class CrystallineConflictPlayerList : CCStatsList<PlayerAlias> {
     private int PlayerCount { get; set; }
     private uint MinMatches { get; set; } = 1;
 
-    public CrystallineConflictPlayerList(Plugin plugin, CrystallineConflictList listModel, OtherPlayerFilter playerFilter) : base(plugin) {
+    public CrystallineConflictPlayerList(Plugin plugin, CrystallineConflictList listModel, OtherPlayerFilter playerFilter) : base(plugin)
+    {
         ListModel = listModel;
         OtherPlayerFilter = playerFilter;
         MinMatches = plugin.Configuration.MatchWindowFilters.MinMatches;
     }
 
-    protected override void PreTableDraw() {
+    protected override void PreTableDraw()
+    {
         int minMatches = (int)MinMatches;
-        ImGui.SetNextItemWidth(float.Max(ImGui.GetContentRegionAvail().X / 3f, 150f * ImGuiHelpers.GlobalScale));
-        if(ImGui.SliderInt("Min. matches", ref minMatches, 1, 100)) {
+        ImGui.SetNextItemWidth(Math.Max(ImGui.GetContentRegionAvail().X / 3f, 150f * ImGuiHelpers.GlobalScale));
+        if (ImGui.SliderInt("最小匹配次数", ref minMatches, 1, 100))
+        {
             MinMatches = (uint)minMatches;
             _plugin.Configuration.MatchWindowFilters.MinMatches = MinMatches;
             RemoveByMatchCount(MinMatches);
         }
         ImGui.AlignTextToFramePadding();
-        ImGuiHelper.HelpMarker("Right-click table header for column options.", false, true);
+        ImGuiHelper.HelpMarker("右键单击表头以获取列选项。", false, true);
         ImGui.SameLine();
         ImGuiHelper.CSVButton(ListCSV);
         ImGui.SameLine();
-        ImGui.TextUnformatted($"Total players:   {DataModel.Count}");
+        ImGui.TextUnformatted($"总玩家数:   {DataModel.Count}");
 
     }
 
-    protected override void PostColumnSetup() {
+
+
+    protected override void PostColumnSetup()
+    {
         ImGui.TableSetupScrollFreeze(1, 1);
         //column sorting
         ImGuiTableSortSpecsPtr sortSpecs = ImGui.TableGetSortSpecs();
-        if(sortSpecs.SpecsDirty || TriggerSort) {
+        if (sortSpecs.SpecsDirty || TriggerSort)
+        {
             TriggerSort = false;
             sortSpecs.SpecsDirty = false;
-            _plugin.DataQueue.QueueDataOperation(() => {
+            _plugin.DataQueue.QueueDataOperation(() =>
+            {
                 SortByColumn(sortSpecs.Specs.ColumnUserID, sortSpecs.Specs.SortDirection);
                 GoToPage(0);
             });
         }
     }
 
-    public override void DrawListItem(PlayerAlias item) {
+    public override void DrawListItem(PlayerAlias item)
+    {
         ImGui.TextUnformatted($"{item.Name}");
         ImGui.TableNextColumn();
         ImGui.TextUnformatted($"{item.HomeWorld}");
         ImGui.TableNextColumn();
         var job = StatsModel[item].StatsAll.Job;
-        if(job != null) {
+        if (job != null)
+        {
             ImGui.TextColored(ImGuiHelper.GetJobColor(job), $"{job}");
         }
         ImGui.TableNextColumn();
@@ -200,9 +211,12 @@ internal class CrystallineConflictPlayerList : CCStatsList<PlayerAlias> {
         ImGuiHelper.DrawColorScale((float)StatsModel[item].ScoreboardPerMatch.HPRestored, ImGuiColors.DPSRed, ImGuiColors.HealerGreen, 300000f, 1000000f, _plugin.Configuration.ColorScaleStats, "#");
         ImGui.TableNextColumn();
         var tcpa = StatsModel[item].ScoreboardPerMatch.TimeOnCrystal;
-        if(_plugin.Configuration.ColorScaleStats) {
+        if (_plugin.Configuration.ColorScaleStats)
+        {
             ImGui.TextColored(ImGuiHelper.ColorScale(ImGuiColors.DPSRed, ImGuiColors.HealerGreen, 30f, 120f, (float)tcpa.TotalSeconds), ImGuiHelper.GetTimeSpanString(tcpa));
-        } else {
+        }
+        else
+        {
             ImGui.TextUnformatted(ImGuiHelper.GetTimeSpanString(tcpa));
         }
 
@@ -220,9 +234,12 @@ internal class CrystallineConflictPlayerList : CCStatsList<PlayerAlias> {
         ImGuiHelper.DrawColorScale((float)StatsModel[item].ScoreboardPerMin.HPRestored, ImGuiColors.DPSRed, ImGuiColors.HealerGreen, 50000f, 200000f, _plugin.Configuration.ColorScaleStats, "#");
         ImGui.TableNextColumn();
         var tcpm = StatsModel[item].ScoreboardPerMin.TimeOnCrystal;
-        if(_plugin.Configuration.ColorScaleStats) {
+        if (_plugin.Configuration.ColorScaleStats)
+        {
             ImGui.TextColored(ImGuiHelper.ColorScale(ImGuiColors.DPSRed, ImGuiColors.HealerGreen, 4f, 25f, (float)tcpm.TotalSeconds), ImGuiHelper.GetTimeSpanString(tcpm));
-        } else {
+        }
+        else
+        {
             ImGui.TextUnformatted(ImGuiHelper.GetTimeSpanString(tcpm));
         }
 
@@ -253,22 +270,28 @@ internal class CrystallineConflictPlayerList : CCStatsList<PlayerAlias> {
     }
 
     //we don't need this
-    public override void OpenFullEditDetail(PlayerAlias item) {
+    public override void OpenFullEditDetail(PlayerAlias item)
+    {
         return;
     }
 
-    public override void OpenItemDetail(PlayerAlias item) {
+    public override void OpenItemDetail(PlayerAlias item)
+    {
         return;
     }
 
-    public override void RefreshDataModel() {
+    public override void RefreshDataModel()
+    {
         Dictionary<PlayerAlias, CCPlayerJobStats> statsModel = new();
         Dictionary<PlayerAlias, List<CCScoreboardDouble>> teamContributions = new();
         Dictionary<PlayerAlias, Dictionary<Job, CCAggregateStats>> jobStats = new();
 
-        foreach(var match in ListModel.DataModel) {
-            foreach(var team in match.Teams) {
-                foreach(var player in team.Value.Players) {
+        foreach (var match in ListModel.DataModel)
+        {
+            foreach (var team in match.Teams)
+            {
+                foreach (var player in team.Value.Players)
+                {
                     bool isLocalPlayer = player.Alias.Equals(match.LocalPlayer);
                     bool isTeammate = !match.IsSpectated && team.Key == match.LocalPlayerTeam!.TeamName;
                     //check against filters
@@ -277,45 +300,62 @@ internal class CrystallineConflictPlayerList : CCStatsList<PlayerAlias> {
                         || OtherPlayerFilter.TeamStatus == TeamStatus.Teammate && isTeammate
                         || OtherPlayerFilter.TeamStatus == TeamStatus.Opponent && !isTeammate && !isLocalPlayer;
                     bool jobMatch = OtherPlayerFilter.AnyJob || OtherPlayerFilter.PlayerJob == player.Job;
-                    if(!nameMatch || !sideMatch || !jobMatch) {
+                    if (!nameMatch || !sideMatch || !jobMatch)
+                    {
                         continue;
                     }
 
-                    if(!statsModel.ContainsKey(player.Alias)) {
+                    if (!statsModel.ContainsKey(player.Alias))
+                    {
                         statsModel.Add(player.Alias, new());
                         teamContributions.Add(player.Alias, new());
                         jobStats.Add(player.Alias, new());
                     }
 
                     statsModel[player.Alias].StatsAll.Matches++;
-                    if(match.MatchWinner == team.Key) {
+                    if (match.MatchWinner == team.Key)
+                    {
                         statsModel[player.Alias].StatsAll.Wins++;
-                    } else if(match.MatchWinner != null) {
+                    }
+                    else if (match.MatchWinner != null)
+                    {
                         statsModel[player.Alias].StatsAll.Losses++;
                     }
 
-                    if(!match.IsSpectated) {
-                        if(isTeammate) {
+                    if (!match.IsSpectated)
+                    {
+                        if (isTeammate)
+                        {
                             statsModel[player.Alias].StatsTeammate.Matches++;
-                            if(match.IsWin) {
+                            if (match.IsWin)
+                            {
                                 statsModel[player.Alias].StatsTeammate.Wins++;
-                            } else if(match.MatchWinner != null) {
+                            }
+                            else if (match.MatchWinner != null)
+                            {
                                 statsModel[player.Alias].StatsTeammate.Losses++;
                             }
-                        } else {
+                        }
+                        else
+                        {
                             statsModel[player.Alias].StatsOpponent.Matches++;
-                            if(match.IsWin) {
+                            if (match.IsWin)
+                            {
                                 statsModel[player.Alias].StatsOpponent.Wins++;
-                            } else if(match.MatchWinner != null) {
+                            }
+                            else if (match.MatchWinner != null)
+                            {
                                 statsModel[player.Alias].StatsOpponent.Losses++;
                             }
                         }
                     }
 
-                    if(match.PostMatch != null) {
+                    if (match.PostMatch != null)
+                    {
                         var playerTeamScoreboard = match.PostMatch.Teams.Where(x => x.Key == team.Key).FirstOrDefault().Value;
                         var playerScoreboard = playerTeamScoreboard.PlayerStats.Where(x => x.Player?.Equals(player.Alias) ?? false).FirstOrDefault();
-                        if(playerScoreboard != null) {
+                        if (playerScoreboard != null)
+                        {
                             statsModel[player.Alias].ScoreboardTotal.MatchTime += match.PostMatch.MatchDuration;
                             statsModel[player.Alias].ScoreboardTotal.Kills += (ulong)playerScoreboard.Kills;
                             statsModel[player.Alias].ScoreboardTotal.Deaths += (ulong)playerScoreboard.Deaths;
@@ -325,7 +365,8 @@ internal class CrystallineConflictPlayerList : CCStatsList<PlayerAlias> {
                             statsModel[player.Alias].ScoreboardTotal.HPRestored += (ulong)playerScoreboard.HPRestored;
                             statsModel[player.Alias].ScoreboardTotal.TimeOnCrystal += playerScoreboard.TimeOnCrystal;
 
-                            teamContributions[player.Alias].Add(new() {
+                            teamContributions[player.Alias].Add(new()
+                            {
                                 Kills = playerTeamScoreboard.TeamStats.Kills != 0 ? (double)playerScoreboard.Kills / playerTeamScoreboard.TeamStats.Kills : 0,
                                 Deaths = playerTeamScoreboard.TeamStats.Deaths != 0 ? (double)playerScoreboard.Deaths / playerTeamScoreboard.TeamStats.Deaths : 0,
                                 Assists = playerTeamScoreboard.TeamStats.Assists != 0 ? (double)playerScoreboard.Assists / playerTeamScoreboard.TeamStats.Assists : 0,
@@ -337,8 +378,10 @@ internal class CrystallineConflictPlayerList : CCStatsList<PlayerAlias> {
                         }
                     }
 
-                    if(player.Job != null) {
-                        if(!jobStats[player.Alias].ContainsKey((Job)player.Job)) {
+                    if (player.Job != null)
+                    {
+                        if (!jobStats[player.Alias].ContainsKey((Job)player.Job))
+                        {
                             jobStats[player.Alias].Add((Job)player.Job, new());
                         }
                         jobStats[player.Alias][(Job)player.Job].Matches++;
@@ -347,12 +390,14 @@ internal class CrystallineConflictPlayerList : CCStatsList<PlayerAlias> {
             }
         }
 
-        foreach(var playerStat in statsModel) {
+        foreach (var playerStat in statsModel)
+        {
             //set favored job
             playerStat.Value.StatsAll.Job = jobStats[playerStat.Key].OrderByDescending(x => x.Value.Matches).FirstOrDefault().Key;
             var statMatches = teamContributions[playerStat.Key].Count;
             //set average stats
-            if(statMatches > 0) {
+            if (statMatches > 0)
+            {
                 playerStat.Value.StatsPersonal.Matches = playerStat.Value.StatsTeammate.Matches + playerStat.Value.StatsOpponent.Matches;
                 playerStat.Value.StatsPersonal.Wins = playerStat.Value.StatsTeammate.Wins + playerStat.Value.StatsOpponent.Wins;
                 playerStat.Value.StatsPersonal.Losses = playerStat.Value.StatsTeammate.Losses + playerStat.Value.StatsOpponent.Losses;
@@ -384,7 +429,8 @@ internal class CrystallineConflictPlayerList : CCStatsList<PlayerAlias> {
             }
             ListCSV += CSVRow(statsModel, playerStat.Key);
         }
-        try {
+        try
+        {
             RefreshLock.Wait();
             DataModel = statsModel.Keys.ToList();
             DataModelUntruncated = DataModel;
@@ -392,15 +438,20 @@ internal class CrystallineConflictPlayerList : CCStatsList<PlayerAlias> {
             PlayerCount = DataModel.Count;
             RemoveByMatchCount(MinMatches);
             TriggerSort = true;
-        } finally {
+        }
+        finally
+        {
             RefreshLock.Release();
         }
     }
 
-    private void RemoveByMatchCount(uint minMatches) {
+    private void RemoveByMatchCount(uint minMatches)
+    {
         List<PlayerAlias> DataModelTruncated = new();
-        foreach(var player in DataModelUntruncated) {
-            if(StatsModel[player].StatsAll.Matches >= minMatches) {
+        foreach (var player in DataModelUntruncated)
+        {
+            if (StatsModel[player].StatsAll.Matches >= minMatches)
+            {
                 DataModelTruncated.Add(player);
             }
         }
@@ -408,17 +459,25 @@ internal class CrystallineConflictPlayerList : CCStatsList<PlayerAlias> {
         GoToPage(0);
     }
 
-    private string CSVRow(Dictionary<PlayerAlias, CCPlayerJobStats> model, PlayerAlias key) {
+    private string CSVRow(Dictionary<PlayerAlias, CCPlayerJobStats> model, PlayerAlias key)
+    {
         string csv = "";
-        foreach(var col in Columns) {
-            if(col.Id == 0) {
+        foreach (var col in Columns)
+        {
+            if (col.Id == 0)
+            {
                 csv += key.Name;
-            } else if(col.Id == 1) {
+            }
+            else if (col.Id == 1)
+            {
                 csv += key.HomeWorld;
-            } else {
+            }
+            else
+            {
                 //find property
                 (var p1, var p2) = GetStatsPropertyFromId(col.Id);
-                if(p1 != null && p2 != null) {
+                if (p1 != null && p2 != null)
+                {
                     csv += p2.GetValue(p1.GetValue(model[key])) ?? 0;
                 }
             }
@@ -428,19 +487,26 @@ internal class CrystallineConflictPlayerList : CCStatsList<PlayerAlias> {
         return csv;
     }
 
-    private void SortByColumn(uint columnId, ImGuiSortDirection direction) {
+    private void SortByColumn(uint columnId, ImGuiSortDirection direction)
+    {
         //_plugin.Log.Debug($"Sorting by {columnId}");
         Func<PlayerAlias, object> comparator = (r) => 0;
 
         //0 = name
         //1 = homeworld
-        if(columnId == 0) {
+        if (columnId == 0)
+        {
             comparator = (r) => r.Name;
-        } else if(columnId == 1) {
+        }
+        else if (columnId == 1)
+        {
             comparator = (r) => r.HomeWorld;
-        } else {
+        }
+        else
+        {
             (var p1, var p2) = GetStatsPropertyFromId(columnId);
-            if(p1 != null && p2 != null) {
+            if (p1 != null && p2 != null)
+            {
                 comparator = (r) => p2.GetValue(p1.GetValue(StatsModel[r])) ?? 0;
             }
         }

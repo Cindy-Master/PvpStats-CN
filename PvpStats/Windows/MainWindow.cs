@@ -34,7 +34,7 @@ internal class MainWindow : Window {
     private bool _firstDraw, _lastWindowCollapsed, _windowCollapsed;
     private Vector2 _lastWindowSize, _lastWindowPosition, _savedWindowSize;
 
-    internal MainWindow(Plugin plugin) : base("Crystalline Conflict Tracker") {
+    internal MainWindow(Plugin plugin) : base("水晶冲突跟踪器") {
         SizeConstraints = new WindowSizeConstraints {
             MinimumSize = new Vector2(425, 400),
             MaximumSize = new Vector2(5000, 5000)
@@ -252,32 +252,32 @@ internal class MainWindow : Window {
         }
         ImGui.PopStyleVar(2);
         ImGui.PopFont();
-        ImGuiHelper.WrappedTooltip($"{(_collapseFilters ? "Show filters" : "Hide filters")}");
+        ImGuiHelper.WrappedTooltip($"{(_collapseFilters ? "显示过滤器" : "隐藏过滤器")}");
 
         if(ImGui.BeginTabBar("TabBar", ImGuiTabBarFlags.None)) {
             //ImGui.SetNextItemWidth(ImGui.GetContentRegionAvail().X / 6f);
             if(_plugin.Configuration.ResizeWindowLeft) {
                 ImGui.SetCursorPosX(ImGui.GetCursorPosX() + 20f);
             }
-            Tab("Matches", ccMatches.Draw);
-            Tab("Summary", () => {
+            Tab("比赛", ccMatches.Draw);
+            Tab("摘要", () => {
                 using(ImRaii.Child("SummaryChild")) {
                     ccSummary.Draw();
                 }
             });
-            Tab("Records", () => {
+            Tab("记录", () => {
                 using(ImRaii.Child("RecordsChild")) {
                     ccRecords.Draw();
                 }
             });
-            Tab("Jobs", ccJobs.Draw);
-            Tab("Players", ccPlayers.Draw);
-            Tab("Credit", () => {
+            Tab("职业", ccJobs.Draw);
+            Tab("玩家", ccPlayers.Draw);
+            Tab("积分", () => {
                 using(ImRaii.Child("CreditChild")) {
                     ccRank.Draw();
                 }
             });
-            Tab("Profile", () => {
+            Tab("个人资料", () => {
                 using(ImRaii.Child("ProfileChild")) {
                     ccProfile.Draw();
                 }
@@ -287,8 +287,8 @@ internal class MainWindow : Window {
     }
 
     private void DrawFiltersTable() {
-        if(ImGui.BeginTable("FilterTable", 2, ImGuiTableFlags.BordersInnerV | ImGuiTableFlags.BordersInnerH)) {
-            ImGui.TableSetupColumn("filterName", ImGuiTableColumnFlags.WidthFixed, ImGuiHelpers.GlobalScale * 110f);
+        if(ImGui.BeginTable("过滤表", 2, ImGuiTableFlags.BordersInnerV | ImGuiTableFlags.BordersInnerH)) {
+            ImGui.TableSetupColumn("过滤名字", ImGuiTableColumnFlags.WidthFixed, ImGuiHelpers.GlobalScale * 110f);
             ImGui.TableSetupColumn($"filters", ImGuiTableColumnFlags.WidthStretch);
             //ImGui.TableNextRow();
             foreach(var filter in Filters) {

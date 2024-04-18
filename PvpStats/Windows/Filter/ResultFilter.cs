@@ -13,7 +13,7 @@ public enum MatchResult {
 }
 
 public class ResultFilter : DataFilter {
-    public override string Name => "Result";
+    public override string Name => "结果";
     public MatchResult Result { get; set; }
     private List<string> _resultCombo = new();
 
@@ -34,7 +34,7 @@ public class ResultFilter : DataFilter {
         int currentIndex = (int)Result;
         //bool allSelected = AllSelected;
         ImGui.SetNextItemWidth(ImGui.GetContentRegionAvail().X / 2);
-        if(ImGui.Combo($"##matchResultCombo", ref currentIndex, _resultCombo.ToArray(), _resultCombo.Count)) {
+        if(ImGui.Combo($"##赛后结果组合", ref currentIndex, _resultCombo.ToArray(), _resultCombo.Count)) {
             _plugin!.DataQueue.QueueDataOperation(() => {
                 Result = (MatchResult)currentIndex;
                 Refresh();

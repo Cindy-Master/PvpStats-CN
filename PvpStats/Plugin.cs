@@ -114,15 +114,15 @@ public sealed class Plugin : IDalamudPlugin {
             }
 
             CommandManager.AddHandler(CCStatsCommandName, new CommandInfo(OnCommand) {
-                HelpMessage = "Opens Crystalline Conflict tracker."
+                HelpMessage = "打开记录器"
             });
             CommandManager.AddHandler(ConfigCommandName, new CommandInfo(OnConfigCommand) {
-                HelpMessage = "Opens config window."
+                HelpMessage = "打开配置窗口"
             });
 
 #if DEBUG
             CommandManager.AddHandler(DebugCommandName, new CommandInfo(OnDebugCommand) {
-                HelpMessage = "Opens debug window."
+                HelpMessage = "打开debug窗口"
             });
             DebugMode = true;
 #endif

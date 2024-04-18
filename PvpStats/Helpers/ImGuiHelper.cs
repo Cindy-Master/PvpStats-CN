@@ -168,7 +168,7 @@ internal static class ImGuiHelper {
     internal static void CSVButton(string csv) {
         try {
             ImGui.PushFont(UiBuilder.IconFont);
-            if(ImGui.Button($"{FontAwesomeIcon.Copy.ToIconString()}##--CopyCSV")) {
+            if(ImGui.Button($"{FontAwesomeIcon.Copy.ToIconString()}##--粘贴为CSV")) {
                 Task.Run(() => {
                     ImGui.SetClipboardText(csv);
                 });
@@ -176,7 +176,7 @@ internal static class ImGuiHelper {
         } finally {
             ImGui.PopFont();
         }
-        WrappedTooltip("Copy CSV to clipboard");
+        WrappedTooltip("复制到剪贴板");
     }
 
     //internal static void IterateOverProps<T>(T item, int maxDepth, int depth = 0) {

@@ -5,7 +5,7 @@ namespace PvpStats.Windows.Filter;
 public abstract class DataFilter {
     protected Plugin? _plugin;
     [JsonIgnore]
-    public virtual string Name => "";
+    public virtual string Name => "数据";
     [JsonIgnore]
     public virtual string? HelpMessage { get; }
     private Action? RefreshData { get; init; }

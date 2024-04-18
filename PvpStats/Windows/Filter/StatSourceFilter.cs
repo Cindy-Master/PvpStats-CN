@@ -16,16 +16,16 @@ public enum StatSource {
 
 public class StatSourceFilter : DataFilter {
 
-    public override string Name => "Stat Source";
+    public override string Name => "数据分数";
     internal bool AllSelected { get; set; }
     internal bool InheritFromPlayerFilter { get; set; }
     public Dictionary<StatSource, bool> FilterState { get; set; } = new();
 
     public static Dictionary<StatSource, string> FilterNames => new() {
-        { StatSource.LocalPlayer, "Local Player" },
-        { StatSource.Teammate, "Teammates" },
-        { StatSource.Opponent, "Opponents" },
-        { StatSource.Spectated, "Spectated Matches" }
+        { StatSource.LocalPlayer, "当前角色" },
+        { StatSource.Teammate, "队友" },
+        { StatSource.Opponent, "对手" },
+        { StatSource.Spectated, "观战的比赛" }
     };
 
     public StatSourceFilter() { }
@@ -54,7 +54,7 @@ public class StatSourceFilter : DataFilter {
     }
 
     internal override void Draw() {
-        using var table = ImRaii.Table("statSourceTable", 4, ImGuiTableFlags.NoClip);
+        using var table = ImRaii.Table("数据分数表", 4, ImGuiTableFlags.NoClip);
         if(table) {
             ImGui.TableSetupColumn($"c1", ImGuiTableColumnFlags.WidthFixed, float.Min(ImGui.GetContentRegionAvail().X / 4, ImGuiHelpers.GlobalScale * 150f));
             ImGui.TableSetupColumn($"c2", ImGuiTableColumnFlags.WidthFixed, float.Min(ImGui.GetContentRegionAvail().X / 4, ImGuiHelpers.GlobalScale * 150f));
@@ -64,7 +64,7 @@ public class StatSourceFilter : DataFilter {
 
             ImGui.TableNextColumn();
             bool allSelected = AllSelected;
-            if(ImGui.Checkbox($"Select All##{GetHashCode()}", ref allSelected)) {
+            if(ImGui.Checkbox($"勾选全部##{GetHashCode()}", ref allSelected)) {
                 _plugin!.DataQueue.QueueDataOperation(() => {
                     foreach(var category in FilterState) {
                         FilterState[category.Key] = allSelected;
@@ -75,13 +75,13 @@ public class StatSourceFilter : DataFilter {
             }
             ImGui.TableNextColumn();
             bool inheritFromPlayerFilter = InheritFromPlayerFilter;
-            if(ImGui.Checkbox($"Inherit from player filter##{GetHashCode()}", ref inheritFromPlayerFilter)) {
+            if(ImGui.Checkbox($"玩家过滤器继承##{GetHashCode()}", ref inheritFromPlayerFilter)) {
                 _plugin!.DataQueue.QueueDataOperation(() => {
                     InheritFromPlayerFilter = inheritFromPlayerFilter;
                     Refresh();
                 });
             }
-            ImGuiHelper.HelpMarker("Will only include stats for players who match all conditions of the player filter.");
+            ImGuiHelper.HelpMarker("只包括符合玩家过滤器所有条件的玩家的统计数据。");
             ImGui.TableNextRow();
 
             foreach(var category in FilterState) {

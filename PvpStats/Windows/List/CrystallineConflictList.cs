@@ -12,13 +12,13 @@ namespace PvpStats.Windows.List;
 internal class CrystallineConflictList : FilteredList<CrystallineConflictMatch> {
 
     protected override List<ColumnParams> Columns { get; set; } = new() {
-        new ColumnParams{Name = "Start Time", Flags = ImGuiTableColumnFlags.WidthFixed, Width = 125f },
-        new ColumnParams{Name = "Arena", Flags = ImGuiTableColumnFlags.WidthFixed, Width = 145f },
-        new ColumnParams{Name = "Job", Flags = ImGuiTableColumnFlags.WidthFixed, Width = 40f, Priority = 1 },
-        new ColumnParams{Name = "Queue", Flags = ImGuiTableColumnFlags.WidthFixed, Width = 50f },
-        new ColumnParams{Name = "Duration", Flags = ImGuiTableColumnFlags.WidthFixed, Width = 40f, Priority = 2 },
-        new ColumnParams{Name = "Result", Flags = ImGuiTableColumnFlags.WidthFixed, Width = 40f },
-        new ColumnParams{Name = "RankAfter", Flags = ImGuiTableColumnFlags.WidthFixed, Width = 125f, Priority = 3 },
+        new ColumnParams{Name = "开始时间", Flags = ImGuiTableColumnFlags.WidthFixed, Width = 125f },
+        new ColumnParams{Name = "地图", Flags = ImGuiTableColumnFlags.WidthFixed, Width = 145f },
+        new ColumnParams{Name = "职业", Flags = ImGuiTableColumnFlags.WidthFixed, Width = 40f, Priority = 1 },
+        new ColumnParams{Name = "队伍", Flags = ImGuiTableColumnFlags.WidthFixed, Width = 50f },
+        new ColumnParams{Name = "期限", Flags = ImGuiTableColumnFlags.WidthFixed, Width = 40f, Priority = 2 },
+        new ColumnParams{Name = "结果", Flags = ImGuiTableColumnFlags.WidthFixed, Width = 40f },
+        new ColumnParams{Name = "等级后", Flags = ImGuiTableColumnFlags.WidthFixed, Width = 125f, Priority = 3 },
     };
     //protected override List<ColumnParams> Columns { get; set; } = new() {
     //    new ColumnParams{Name = "time" },
@@ -38,11 +38,11 @@ internal class CrystallineConflictList : FilteredList<CrystallineConflictMatch> 
         ImGuiHelper.CSVButton(ListCSV);
         ImGui.SameLine();
         using(var font = ImRaii.PushFont(UiBuilder.IconFont)) {
-            if(ImGui.Button($"{FontAwesomeIcon.Ban.ToIconString()}##CloseAllMatches")) {
+            if(ImGui.Button($"{FontAwesomeIcon.Ban.ToIconString()}##关闭全部对局窗口")) {
                 _plugin.DataQueue.QueueDataOperation(_plugin.WindowManager.CloseAllMatchWindows);
             }
         }
-        ImGuiHelper.WrappedTooltip("Close all open match windows");
+        ImGuiHelper.WrappedTooltip("关闭全部打开的对局窗口");
     }
 
     public override void DrawListItem(CrystallineConflictMatch item) {
@@ -74,7 +74,7 @@ internal class CrystallineConflictList : FilteredList<CrystallineConflictMatch> 
         } else {
             color = isWin ? ImGuiColors.HealerGreen : ImGuiColors.DalamudRed;
             color = noWinner ? ImGuiColors.DalamudGrey : color;
-            resultText = isWin ? "WIN" : "LOSS";
+            resultText = isWin ? "WIN" : "LOSE";
             resultText = noWinner ? "???" : resultText;
         }
         ImGui.TextColored(color, resultText);
@@ -111,7 +111,7 @@ internal class CrystallineConflictList : FilteredList<CrystallineConflictMatch> 
 
     protected override void ContextMenuItems(CrystallineConflictMatch item) {
         bool isBookmarked = item.IsBookmarked;
-        if(ImGui.MenuItem($"Favorite##{item!.GetHashCode()}--AddBookmark", null, isBookmarked)) {
+        if(ImGui.MenuItem($"收藏##{item!.GetHashCode()}--加入收藏簿", null, isBookmarked)) {
             item.IsBookmarked = !item.IsBookmarked;
             _plugin.DataQueue.QueueDataOperation(() => {
                 _plugin.Storage.UpdateCCMatch(item, false);
@@ -119,7 +119,7 @@ internal class CrystallineConflictList : FilteredList<CrystallineConflictMatch> 
         }
 
 #if DEBUG
-        if(ImGui.MenuItem($"Edit document##{item!.GetHashCode()}--FullEditContext")) {
+        if(ImGui.MenuItem($"修改文档##{item!.GetHashCode()}--完整修改上下文")) {
             OpenFullEditDetail(item);
         }
 #endif

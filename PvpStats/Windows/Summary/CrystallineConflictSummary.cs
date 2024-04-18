@@ -272,34 +272,34 @@ internal class CrystallineConflictSummary {
 
             if(_statsEligibleMatches > 0) {
                 ImGui.Separator();
-                ImGui.TextColored(ImGuiColors.DalamudYellow, "Average Performance:");
+                ImGui.TextColored(ImGuiColors.DalamudYellow, "平均表现:");
                 //ImGui.SameLine();
                 //ImGui.Text($"Eligible matches: {_statsEligibleMatches}");
                 //ImGui.SameLine();
                 //ImGui.Text($"Eligible wins: {_statsEligibleWins}");
                 //ImGui.SameLine();
-                ImGuiHelper.HelpMarker("1st row: average per match.\n2nd row: average per minute.\n3rd row: median team contribution per match.");
+                ImGuiHelper.HelpMarker("1st row: 每场平均值。\n2nd row: 每分钟平均值。\n3rd row: 每场中位队伍贡献。");
                 DrawMatchStatsTable();
             }
 
             if(_jobStats.Count > 0) {
                 ImGui.Separator();
-                ImGui.TextColored(ImGuiColors.DalamudYellow, "Teammates' Jobs Played:");
+                ImGui.TextColored(ImGuiColors.DalamudYellow, "队友' 游玩的职业:");
                 DrawJobTable(_allyJobStats);
                 ImGui.Separator();
-                ImGui.TextColored(ImGuiColors.DalamudYellow, "Opponents' Jobs Played:");
+                ImGui.TextColored(ImGuiColors.DalamudYellow, "对手' 游玩的职业:");
                 DrawJobTable(_enemyJobStats);
             }
 
             if(_teammateStats.Count > 0) {
                 ImGui.Separator();
-                ImGui.TextColored(ImGuiColors.DalamudYellow, "Top Teammates:");
+                ImGui.TextColored(ImGuiColors.DalamudYellow, "队友排行榜:");
                 DrawPlayerStatsTable(_teammateStats);
             }
 
             if(_enemyStats.Count > 0) {
                 ImGui.Separator();
-                ImGui.TextColored(ImGuiColors.DalamudYellow, "Top Opponents:");
+                ImGui.TextColored(ImGuiColors.DalamudYellow, "对手排行榜:");
                 DrawPlayerStatsTable(_enemyStats);
             }
         } finally {
@@ -309,33 +309,33 @@ internal class CrystallineConflictSummary {
 
     private void DrawResultTable() {
         if(ImGui.BeginTable($"StatsSummary", 3, ImGuiTableFlags.NoBordersInBody | ImGuiTableFlags.NoHostExtendX | ImGuiTableFlags.NoClip | ImGuiTableFlags.NoSavedSettings)) {
-            ImGui.TableSetupColumn("description", ImGuiTableColumnFlags.WidthFixed, ImGuiHelpers.GlobalScale * 158f);
-            ImGui.TableSetupColumn($"value", ImGuiTableColumnFlags.WidthFixed, ImGuiHelpers.GlobalScale * 45f);
-            ImGui.TableSetupColumn($"rate", ImGuiTableColumnFlags.WidthFixed, ImGuiHelpers.GlobalScale * 45f);
+            ImGui.TableSetupColumn("描述", ImGuiTableColumnFlags.WidthFixed, ImGuiHelpers.GlobalScale * 158f);
+            ImGui.TableSetupColumn($"数值", ImGuiTableColumnFlags.WidthFixed, ImGuiHelpers.GlobalScale * 45f);
+            ImGui.TableSetupColumn($"比率", ImGuiTableColumnFlags.WidthFixed, ImGuiHelpers.GlobalScale * 45f);
 
             ImGui.TableNextColumn();
-            ImGui.Text("Matches: ");
+            ImGui.Text("比赛: ");
             ImGui.TableNextColumn();
             ImGui.Text($"{_totalMatches.ToString("N0")}");
             ImGui.TableNextColumn();
 
             if(_totalMatches > 0) {
                 ImGui.TableNextColumn();
-                ImGui.Text("Wins: ");
+                ImGui.Text("胜利: ");
                 ImGui.TableNextColumn();
                 ImGui.Text($"{_totalWins.ToString("N0")}");
                 ImGui.TableNextColumn();
                 ImGui.Text($"{string.Format("{0:P}%", (double)_totalWins / (_totalWins + _totalLosses))}");
 
                 ImGui.TableNextColumn();
-                ImGui.Text("Losses: ");
+                ImGui.Text("失败: ");
                 ImGui.TableNextColumn();
                 ImGui.Text($"{_totalLosses.ToString("N0")}");
                 ImGui.TableNextColumn();
 
                 if(_totalOther > 0) {
                     ImGui.TableNextColumn();
-                    ImGui.Text("Other: ");
+                    ImGui.Text("其他: ");
                     ImGui.TableNextColumn();
                     ImGui.Text($"{_totalOther.ToString("N0")}");
                     ImGui.TableNextColumn();
@@ -344,7 +344,7 @@ internal class CrystallineConflictSummary {
                 ImGui.TableNextRow();
                 ImGui.TableNextRow();
                 ImGui.TableNextColumn();
-                ImGui.Text("Average match length: ");
+                ImGui.Text("平均比赛时长: ");
                 ImGui.TableNextColumn();
                 ImGui.Text($"{_averageMatchLength.Minutes}{_averageMatchLength.ToString(@"\:ss")}");
                 ImGui.TableNextColumn();
@@ -354,11 +354,11 @@ internal class CrystallineConflictSummary {
     }
 
     private void DrawJobTable(Dictionary<Job, JobStats> jobStats) {
-        if(ImGui.BeginTable($"JobTable", 4, ImGuiTableFlags.NoBordersInBody | ImGuiTableFlags.NoHostExtendX | ImGuiTableFlags.NoClip | ImGuiTableFlags.NoSavedSettings)) {
-            ImGui.TableSetupColumn("Job");
-            ImGui.TableSetupColumn($"Matches");
-            ImGui.TableSetupColumn($"Wins");
-            ImGui.TableSetupColumn($"Win Rate");
+        if(ImGui.BeginTable($"职业表", 4, ImGuiTableFlags.NoBordersInBody | ImGuiTableFlags.NoHostExtendX | ImGuiTableFlags.NoClip | ImGuiTableFlags.NoSavedSettings)) {
+            ImGui.TableSetupColumn("职业");
+            ImGui.TableSetupColumn($"比赛");
+            ImGui.TableSetupColumn($"胜利");
+            ImGui.TableSetupColumn($"胜利比率");
 
             ImGui.TableHeadersRow();
 
@@ -383,11 +383,11 @@ internal class CrystallineConflictSummary {
 
     private void DrawPlayerStatsTable(Dictionary<PlayerAlias, PlayerStats> playerStats) {
         if(ImGui.BeginTable($"JobTable", 4, ImGuiTableFlags.NoBordersInBody | ImGuiTableFlags.NoHostExtendX | ImGuiTableFlags.NoClip | ImGuiTableFlags.NoSavedSettings)) {
-            ImGui.TableSetupColumn("Player");
+            ImGui.TableSetupColumn("玩家");
             //ImGui.TableSetupColumn($"Home World");
-            ImGui.TableSetupColumn($"Favored\nJob", ImGuiTableColumnFlags.WidthFixed, ImGuiHelpers.GlobalScale * 45f);
-            ImGui.TableSetupColumn($"Matches", ImGuiTableColumnFlags.WidthFixed, ImGuiHelpers.GlobalScale * 45f);
-            ImGui.TableSetupColumn($"Wins", ImGuiTableColumnFlags.WidthFixed, ImGuiHelpers.GlobalScale * 45f);
+            ImGui.TableSetupColumn($"喜欢的职业", ImGuiTableColumnFlags.WidthFixed, ImGuiHelpers.GlobalScale * 45f);
+            ImGui.TableSetupColumn($"比赛", ImGuiTableColumnFlags.WidthFixed, ImGuiHelpers.GlobalScale * 45f);
+            ImGui.TableSetupColumn($"胜利", ImGuiTableColumnFlags.WidthFixed, ImGuiHelpers.GlobalScale * 45f);
             //ImGui.TableSetupColumn($"Win Rate");
 
             ImGui.TableHeadersRow();
@@ -420,14 +420,14 @@ internal class CrystallineConflictSummary {
     }
 
     private void DrawMatchStatsTable() {
-        if(ImGui.BeginTable($"MatchStatsTable", 7, ImGuiTableFlags.NoBordersInBody | ImGuiTableFlags.NoHostExtendX | ImGuiTableFlags.NoClip | ImGuiTableFlags.NoSavedSettings)) {
-            ImGui.TableSetupColumn("Kills");
-            ImGui.TableSetupColumn($"Deaths");
-            ImGui.TableSetupColumn($"Assists");
-            ImGui.TableSetupColumn("Damage\nDealt");
-            ImGui.TableSetupColumn($"Damage\nTaken");
-            ImGui.TableSetupColumn($"HP\nRestored");
-            ImGui.TableSetupColumn("Time on\nCrystal");
+        if(ImGui.BeginTable($"对局数据表", 7, ImGuiTableFlags.NoBordersInBody | ImGuiTableFlags.NoHostExtendX | ImGuiTableFlags.NoClip | ImGuiTableFlags.NoSavedSettings)) {
+            ImGui.TableSetupColumn("击杀");
+            ImGui.TableSetupColumn($"死亡");
+            ImGui.TableSetupColumn($"助攻");
+            ImGui.TableSetupColumn($"造成伤害");
+            ImGui.TableSetupColumn($"承受伤害");
+            ImGui.TableSetupColumn($"恢复的生命值");
+            ImGui.TableSetupColumn("推车时间");
 
             ImGui.TableHeadersRow();
 

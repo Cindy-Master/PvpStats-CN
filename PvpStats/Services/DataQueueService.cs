@@ -55,7 +55,7 @@ internal class DataQueueService {
                     nextTask.task.Start();
                     await nextTask.task;
                 } else {
-                    throw new Exception("Unable to dequeue task!");
+                    throw new Exception("无法离开任务！");
                     //Log.Warning($"Unable to dequeue next task. Tasks remaining: {DataTaskQueue.Count}");
                 }
             } catch(Exception e) {

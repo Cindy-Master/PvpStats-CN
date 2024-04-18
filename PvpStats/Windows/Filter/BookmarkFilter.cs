@@ -4,7 +4,7 @@ using System;
 namespace PvpStats.Windows.Filter;
 
 public class BookmarkFilter : DataFilter {
-    public override string Name => "Favorites Only";
+    public override string Name => "收藏的对局";
     public bool BookmarkedOnly { get; set; } = false;
 
     public BookmarkFilter() { }

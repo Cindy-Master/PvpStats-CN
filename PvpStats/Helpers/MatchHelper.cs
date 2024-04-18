@@ -19,12 +19,12 @@ public static class MatchHelper {
     };
 
     public static readonly Dictionary<ArenaTier, string> ArenaRankLookup = new() {
-        { ArenaTier.Bronze, "bronze" },
-        { ArenaTier.Silver, "silver" },
-        { ArenaTier.Gold, "gold" },
-        { ArenaTier.Platinum, "platinum" },
-        { ArenaTier.Diamond, "diamond" },
-        { ArenaTier.Crystal, "crystal" }
+        { ArenaTier.Bronze, "青铜" },
+        { ArenaTier.Silver, "白银" },
+        { ArenaTier.Gold, "黄金" },
+        { ArenaTier.Platinum, "白金" },
+        { ArenaTier.Diamond, "钻石" },
+        { ArenaTier.Crystal, "水晶" }
     };
 
     public static CrystallineConflictMap? GetArena(uint territoryId) {
@@ -102,11 +102,11 @@ public static class MatchHelper {
 
     public static string GetArenaName(CrystallineConflictMap map) {
         return map switch {
-            CrystallineConflictMap.Palaistra => "The Palaistra",
-            CrystallineConflictMap.VolcanicHeart => "The Volcanic Heart",
-            CrystallineConflictMap.CloudNine => "Cloud Nine",
-            CrystallineConflictMap.ClockworkCastleTown => "Clockwork Castletown",
-            CrystallineConflictMap.RedSands => "The Red Sands",
+            CrystallineConflictMap.Palaistra => "角力学校",
+            CrystallineConflictMap.VolcanicHeart => "火山之心",
+            CrystallineConflictMap.CloudNine => "九霄云上",
+            CrystallineConflictMap.ClockworkCastleTown => "机关大殿",
+            CrystallineConflictMap.RedSands => "赤土红砂",
             _ => "Unknown",
         };
     }
@@ -123,8 +123,8 @@ public static class MatchHelper {
 
     public static string GetTeamName(CrystallineConflictTeamName team) {
         switch(team) {
-            case CrystallineConflictTeamName.Astra: return "Astra";
-            case CrystallineConflictTeamName.Umbra: return "Umbra";
+            case CrystallineConflictTeamName.Astra: return "星极队";
+            case CrystallineConflictTeamName.Umbra: return "灵极队";
             default: return "Unknown";
         }
     }

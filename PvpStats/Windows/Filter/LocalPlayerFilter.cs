@@ -3,9 +3,9 @@ using System;
 
 namespace PvpStats.Windows.Filter;
 public class LocalPlayerFilter : DataFilter {
-    public override string Name => "Local Player";
+    public override string Name => "当前角色";
 
-    public override string HelpMessage => "Will only include matches using the currently logged-in character. Useful if you use multiple characters and want to view results separately.";
+    public override string HelpMessage => "只包括使用当前登录角色的比赛。如果您使用多个角色并希望分别查看结果,大人请用这个。";
     public bool CurrentPlayerOnly { get; set; }
     public LocalPlayerFilter() { }
 
@@ -17,7 +17,7 @@ public class LocalPlayerFilter : DataFilter {
 
     internal override void Draw() {
         bool currentPlayerOnly = CurrentPlayerOnly;
-        if(ImGui.Checkbox("Current player only", ref currentPlayerOnly)) {
+        if(ImGui.Checkbox("仅显示当前角色", ref currentPlayerOnly)) {
             _plugin!.DataQueue.QueueDataOperation(() => {
                 CurrentPlayerOnly = currentPlayerOnly;
                 Refresh();

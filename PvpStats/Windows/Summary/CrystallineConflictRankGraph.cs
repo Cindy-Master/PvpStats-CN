@@ -107,19 +107,19 @@ internal class CrystallineConflictRankGraph {
 
                 ImPlot.SetNextMarkerStyle(ImPlotMarker.None);
                 ImPlot.PushStyleColor(ImPlotCol.Line, ImGui.GetColorU32(ImGuiColors.DalamudWhite));
-                ImPlot.PlotLine("Crystal Credit", ref xs[0], ref ys[0], xs.Length, ImPlotLineFlags.None);
+                ImPlot.PlotLine("水晶积分", ref xs[0], ref ys[0], xs.Length, ImPlotLineFlags.None);
                 ImPlot.PopStyleColor();
 
                 ImPlot.SetNextMarkerStyle(ImPlotMarker.None);
                 ImPlot.PushStyleColor(ImPlotCol.Line, ImGui.GetColorU32(ImGuiColors.DalamudRed));
                 ImPlot.PushStyleVar(ImPlotStyleVar.LineWeight, 8f);
-                ImPlot.PlotLine("Losses", ref xsLoss[0], ref ysLoss[0], xsLoss.Length, ImPlotLineFlags.Segments);
+                ImPlot.PlotLine("失败", ref xsLoss[0], ref ysLoss[0], xsLoss.Length, ImPlotLineFlags.Segments);
                 ImPlot.PopStyleColor();
 
                 ImPlot.SetNextMarkerStyle(ImPlotMarker.None);
                 ImPlot.PushStyleColor(ImPlotCol.Line, ImGui.GetColorU32(ImGuiColors.ParsedGreen));
                 ImPlot.PushStyleVar(ImPlotStyleVar.LineWeight, 5f);
-                ImPlot.PlotLine("Wins", ref xsWin[0], ref ysWin[0], xsWin.Length, ImPlotLineFlags.Segments);
+                ImPlot.PlotLine("胜利", ref xsWin[0], ref ysWin[0], xsWin.Length, ImPlotLineFlags.Segments);
                 ImPlot.PopStyleColor();
 
                 ImPlot.PushPlotClipRect();

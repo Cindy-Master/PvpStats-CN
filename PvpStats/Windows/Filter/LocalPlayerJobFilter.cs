@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace PvpStats.Windows.Filter;
 public class LocalPlayerJobFilter : DataFilter {
-    public override string Name => "Job";
+    public override string Name => "职业";
     //public override string HelpMessage => "Comma-separate multiple party members.";
     public Job PlayerJob { get; set; }
     public JobSubRole? JobRole { get; set; }
@@ -41,7 +41,7 @@ public class LocalPlayerJobFilter : DataFilter {
         int jobIndex = AnyJob ? 0 : JobRole != null ? (int)JobRole + 1 : (int)PlayerJob + _roleCount + 1;
 
         ImGui.SetNextItemWidth(ImGui.GetContentRegionAvail().X / 2f);
-        if(ImGui.Combo("###LocalPlayerJobCombo", ref jobIndex, _jobCombo.ToArray(), _jobCombo.Count)) {
+        if(ImGui.Combo("###当前角色职业组合", ref jobIndex, _jobCombo.ToArray(), _jobCombo.Count)) {
             _plugin!.DataQueue.QueueDataOperation(() => {
                 if(jobIndex == 0) {
                     AnyJob = true;

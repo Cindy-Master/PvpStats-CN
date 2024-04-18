@@ -52,7 +52,7 @@ internal class CrystallineConflictRecords {
                 continue;
             }
 
-            if(mostKills == null || match.LocalPlayerStats?.Kills > mostKills.LocalPlayerStats?.Kills 
+            if(mostKills == null || match.LocalPlayerStats?.Kills > mostKills.LocalPlayerStats?.Kills
                 || (match.LocalPlayerStats?.Kills == mostKills.LocalPlayerStats?.Kills && match.MatchDuration < mostKills.MatchDuration)) {
                 mostKills = match;
             }
@@ -60,7 +60,7 @@ internal class CrystallineConflictRecords {
                 || (match.LocalPlayerStats?.Deaths == mostDeaths.LocalPlayerStats?.Deaths && match.MatchDuration < mostDeaths.MatchDuration)) {
                 mostDeaths = match;
             }
-            if(mostAssists == null || match.LocalPlayerStats?.Assists > mostAssists.LocalPlayerStats?.Assists 
+            if(mostAssists == null || match.LocalPlayerStats?.Assists > mostAssists.LocalPlayerStats?.Assists
                 || (match.LocalPlayerStats?.Assists == mostAssists.LocalPlayerStats?.Assists && match.MatchDuration < mostAssists.MatchDuration)) {
                 mostAssists = match;
             }
@@ -114,17 +114,17 @@ internal class CrystallineConflictRecords {
             };
             Superlatives = new();
             if(longestMatch != null) {
-                addSuperlative(longestMatch, "Longest match", ImGuiHelper.GetTimeSpanString((TimeSpan)longestMatch!.MatchDuration));
-                addSuperlative(shortestMatch, "Shortest match", ImGuiHelper.GetTimeSpanString((TimeSpan)shortestMatch!.MatchDuration));
-                addSuperlative(closestMatch, "Closest match", closestMatch!.LoserProgress.ToString());
+                addSuperlative(longestMatch, "最长的比赛", ImGuiHelper.GetTimeSpanString((TimeSpan)longestMatch!.MatchDuration));
+                addSuperlative(shortestMatch, "最短的比赛", ImGuiHelper.GetTimeSpanString((TimeSpan)shortestMatch!.MatchDuration));
+                addSuperlative(closestMatch, "最接近的比赛", closestMatch!.LoserProgress.ToString());
                 if(mostKills != null) {
-                    addSuperlative(mostKills, "Most kills", mostKills!.LocalPlayerStats!.Kills.ToString());
-                    addSuperlative(mostDeaths, "Most deaths", mostDeaths!.LocalPlayerStats!.Deaths.ToString());
-                    addSuperlative(mostAssists, "Most assists", mostAssists!.LocalPlayerStats!.Assists.ToString());
-                    addSuperlative(mostDamageDealt, "Most damage dealt", mostDamageDealt!.LocalPlayerStats!.DamageDealt.ToString());
-                    addSuperlative(mostDamageTaken, "Most damage taken", mostDamageTaken!.LocalPlayerStats!.DamageTaken.ToString());
-                    addSuperlative(mostHPRestored, "Most HP restored", mostHPRestored!.LocalPlayerStats!.HPRestored.ToString());
-                    addSuperlative(mostTimeOnCrystal, "Longest time on crystal", ImGuiHelper.GetTimeSpanString(mostTimeOnCrystal!.LocalPlayerStats!.TimeOnCrystal));
+                    addSuperlative(mostKills, "最多击杀", mostKills!.LocalPlayerStats!.Kills.ToString());
+                    addSuperlative(mostDeaths, "最多死亡", mostDeaths!.LocalPlayerStats!.Deaths.ToString());
+                    addSuperlative(mostAssists, "最多协助", mostAssists!.LocalPlayerStats!.Assists.ToString());
+                    addSuperlative(mostDamageDealt, "造成的最多伤害", mostDamageDealt!.LocalPlayerStats!.DamageDealt.ToString());
+                    addSuperlative(mostDamageTaken, "承受的最多伤害", mostDamageTaken!.LocalPlayerStats!.DamageTaken.ToString());
+                    addSuperlative(mostHPRestored, "恢复的最多生命值", mostHPRestored!.LocalPlayerStats!.HPRestored.ToString());
+                    addSuperlative(mostTimeOnCrystal, "最长的水晶时间", ImGuiHelper.GetTimeSpanString(mostTimeOnCrystal!.LocalPlayerStats!.TimeOnCrystal));
                 }
             }
             LongestWinStreak = longestWinStreak;
@@ -141,15 +141,15 @@ internal class CrystallineConflictRecords {
         try {
             using(var table = ImRaii.Table("streaks", 2, ImGuiTableFlags.NoBordersInBody | ImGuiTableFlags.NoHostExtendX | ImGuiTableFlags.NoClip | ImGuiTableFlags.NoSavedSettings)) {
                 if(table) {
-                    ImGui.TableSetupColumn("title", ImGuiTableColumnFlags.WidthFixed, ImGuiHelpers.GlobalScale * 158f);
+                    ImGui.TableSetupColumn("标题", ImGuiTableColumnFlags.WidthFixed, ImGuiHelpers.GlobalScale * 158f);
                     ImGui.TableSetupColumn($"value", ImGuiTableColumnFlags.WidthFixed, ImGuiHelpers.GlobalScale * 50f);
 
                     ImGui.TableNextColumn();
-                    ImGui.TextColored(ImGuiColors.DalamudYellow, "Longest win streak:");
+                    ImGui.TextColored(ImGuiColors.DalamudYellow, "最长连胜：");
                     ImGui.TableNextColumn();
                     ImGui.Text(LongestWinStreak.ToString());
                     ImGui.TableNextColumn();
-                    ImGui.TextColored(ImGuiColors.DalamudYellow, "Longest loss streak:");
+                    ImGui.TextColored(ImGuiColors.DalamudYellow, "最长连败：");
                     ImGui.TableNextColumn();
                     ImGui.Text(LongestLossStreak.ToString());
                 }
@@ -190,12 +190,12 @@ internal class CrystallineConflictRecords {
             }
         }
 
-        using(var table = ImRaii.Table("match", 4, ImGuiTableFlags.NoBordersInBody | ImGuiTableFlags.NoHostExtendX | ImGuiTableFlags.NoClip | ImGuiTableFlags.NoSavedSettings)) {
+        using(var table = ImRaii.Table("对局", 6, ImGuiTableFlags.NoBordersInBody | ImGuiTableFlags.NoHostExtendX | ImGuiTableFlags.NoClip | ImGuiTableFlags.NoSavedSettings)) {
             if(table) {
-                ImGui.TableSetupColumn("Time", ImGuiTableColumnFlags.WidthFixed, ImGuiHelpers.GlobalScale * 100f);
-                ImGui.TableSetupColumn("Arena", ImGuiTableColumnFlags.WidthFixed, ImGuiHelpers.GlobalScale * 150f);
-                ImGui.TableSetupColumn("Job", ImGuiTableColumnFlags.WidthFixed, ImGuiHelpers.GlobalScale * 40f);
-                ImGui.TableSetupColumn("Result", ImGuiTableColumnFlags.WidthFixed, ImGuiHelpers.GlobalScale * 40f);
+                ImGui.TableSetupColumn("时间", ImGuiTableColumnFlags.WidthFixed, ImGuiHelpers.GlobalScale * 100f);
+                ImGui.TableSetupColumn("地图", ImGuiTableColumnFlags.WidthFixed, ImGuiHelpers.GlobalScale * 150f);
+                ImGui.TableSetupColumn("职业", ImGuiTableColumnFlags.WidthFixed, ImGuiHelpers.GlobalScale * 40f);
+                ImGui.TableSetupColumn("结果", ImGuiTableColumnFlags.WidthFixed, ImGuiHelpers.GlobalScale * 40f);
 
                 ImGui.TableNextColumn();
                 ImGui.Text($"{match.DutyStartTime:MM/dd/yyyy HH:mm}");
@@ -211,7 +211,7 @@ internal class CrystallineConflictRecords {
                     var result = match.IsWin ? "WIN" : match.IsLoss ? "LOSS" : "???";
                     ImGui.TextColored(color, result);
                 } else {
-                    ImGui.Text($"Spectated");
+                    ImGui.Text($"观战");
                 }
             }
         }

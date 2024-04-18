@@ -5,7 +5,7 @@ using System;
 namespace PvpStats.Windows.Filter;
 public class MiscFilter : DataFilter {
 
-    public override string Name => "Misc";
+    public override string Name => "其他";
 
     public bool MustHaveStats { get; set; }
 
@@ -21,14 +21,14 @@ public class MiscFilter : DataFilter {
     }
 
     internal override void Draw() {
-        ImGui.BeginTable("miscFilterTable", 3, ImGuiTableFlags.NoClip);
+        ImGui.BeginTable("其他过滤表", 3, ImGuiTableFlags.NoClip);
         ImGui.TableSetupColumn($"c1", ImGuiTableColumnFlags.WidthFixed, float.Min(ImGui.GetContentRegionAvail().X / 3, ImGuiHelpers.GlobalScale * 350f));
         ImGui.TableSetupColumn($"c2", ImGuiTableColumnFlags.WidthFixed, float.Min(ImGui.GetContentRegionAvail().X / 3, ImGuiHelpers.GlobalScale * 350f));
         ImGui.TableSetupColumn($"c3", ImGuiTableColumnFlags.WidthFixed, float.Min(ImGui.GetContentRegionAvail().X / 3, ImGuiHelpers.GlobalScale * 350f));
         ImGui.TableNextRow();
         ImGui.TableNextColumn();
         bool mustHaveStats = MustHaveStats;
-        if(ImGui.Checkbox("Must have post-game stats", ref mustHaveStats)) {
+        if(ImGui.Checkbox("必须有赛后统计", ref mustHaveStats)) {
             _plugin!.DataQueue.QueueDataOperation(() => {
                 MustHaveStats = mustHaveStats;
                 Refresh();

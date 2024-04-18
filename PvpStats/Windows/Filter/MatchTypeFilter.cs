@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace PvpStats.Windows.Filter;
 public class MatchTypeFilter : DataFilter {
 
-    public override string Name => "Queue";
+    public override string Name => "队列";
     internal bool AllSelected { get; set; }
     public Dictionary<CrystallineConflictMatchType, bool> FilterState { get; set; } = new();
 
@@ -38,7 +38,7 @@ public class MatchTypeFilter : DataFilter {
 
     internal override void Draw() {
         bool allSelected = AllSelected;
-        if(ImGui.Checkbox($"Select All##{GetHashCode()}", ref allSelected)) {
+        if(ImGui.Checkbox($"勾选全部##{GetHashCode()}", ref allSelected)) {
             _plugin!.DataQueue.QueueDataOperation(() => {
                 foreach(var category in FilterState) {
                     FilterState[category.Key] = allSelected;
@@ -48,7 +48,7 @@ public class MatchTypeFilter : DataFilter {
             });
         }
 
-        ImGui.BeginTable("matchTypeFilterTable", 2);
+        ImGui.BeginTable("比赛类型过滤", 2);
         ImGui.TableSetupColumn($"c1", ImGuiTableColumnFlags.WidthFixed, float.Min(ImGui.GetContentRegionAvail().X / 2, ImGuiHelpers.GlobalScale * 400f));
         ImGui.TableSetupColumn($"c2", ImGuiTableColumnFlags.WidthFixed, float.Min(ImGui.GetContentRegionAvail().X / 2, ImGuiHelpers.GlobalScale * 400f));
         ImGui.TableNextRow();

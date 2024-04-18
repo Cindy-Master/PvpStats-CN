@@ -14,7 +14,7 @@ public enum TeamStatus {
 }
 
 public class OtherPlayerFilter : DataFilter {
-    public override string Name => "Player";
+    public override string Name => "玩家";
     //public override string HelpMessage => "Comma-separate multiple party members.";
     public string PlayerNamesRaw { get; set; } = "";
     public Job PlayerJob { get; set; }
@@ -48,7 +48,7 @@ public class OtherPlayerFilter : DataFilter {
         int teamIndex = (int)TeamStatus;
 
         ImGui.SetNextItemWidth(ImGui.GetContentRegionAvail().X);
-        if(ImGui.InputTextWithHint("###PlayerNameInput", "Enter player name and world", ref playerName, 50)) {
+        if(ImGui.InputTextWithHint("###玩家输入", "输入玩家姓名和服名", ref playerName, 50)) {
             if(playerName != _lastTextValue) {
                 _lastTextValue = playerName;
                 _plugin!.DataQueue.QueueDataOperation(() => {
@@ -58,7 +58,7 @@ public class OtherPlayerFilter : DataFilter {
             }
         }
         ImGui.SetNextItemWidth(ImGui.GetContentRegionAvail().X / 2);
-        if(ImGui.Combo("###TeamStatusCombo", ref teamIndex, _teamStatusCombo, _teamStatusCombo.Length)) {
+        if(ImGui.Combo("###队伍职业组合", ref teamIndex, _teamStatusCombo, _teamStatusCombo.Length)) {
             _plugin!.DataQueue.QueueDataOperation(() => {
                 TeamStatus = (TeamStatus)teamIndex;
                 Refresh();
@@ -66,7 +66,7 @@ public class OtherPlayerFilter : DataFilter {
         }
         ImGui.SameLine();
         ImGui.SetNextItemWidth(ImGui.GetContentRegionAvail().X);
-        if(ImGui.Combo("###JobCombo", ref jobIndex, _jobCombo.ToArray(), _jobCombo.Count)) {
+        if(ImGui.Combo("###职业组合", ref jobIndex, _jobCombo.ToArray(), _jobCombo.Count)) {
             _plugin!.DataQueue.QueueDataOperation(() => {
                 if(jobIndex == 0) {
                     AnyJob = true;

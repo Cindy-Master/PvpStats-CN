@@ -1,4 +1,4 @@
-﻿using Dalamud;
+﻿﻿using Dalamud;
 using Dalamud.Utility;
 using LiteDB;
 using PvpStats.Types.Match;
